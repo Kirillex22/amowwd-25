@@ -15,8 +15,6 @@ services:
 
   db:
     image: postgres:16
-    ports:
-      - "5432:5432"
     environment:
       DB_HOST: ${DB_HOST}
       DB_PORT: ${DB_PORT}
