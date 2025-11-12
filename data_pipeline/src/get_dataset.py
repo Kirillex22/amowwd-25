@@ -11,7 +11,7 @@ from data_pipeline.src.models import Record
 
 fake = Faker()
 
-PROBA = 0.1  # вероятность генерации фиксированного UUID для тестирования дубликатов
+ID_COLLISION_PROBA = 0.1  # вероятность генерации фиксированного UUID для тестирования дубликатов
 static_uuid = str(uuid.uuid4())
 
 def get_static_uuid() -> str:
@@ -45,6 +45,8 @@ def get_dataset(n_rows: int = 200, use_static_uuid=False) -> List[Record]:
     """
     Генерация набора данных через factory_boy.
     """
-    if use_static_uuid:
-        PROBA = 0
+    if not use_static_uuid:
+        global ID_COLLISION_PROBA
+        ID_COLLISION_PROBA = 0
+
     return [RecordFactory() for _ in range(n_rows)]
