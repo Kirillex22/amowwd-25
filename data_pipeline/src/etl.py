@@ -3,7 +3,7 @@ from data_pipeline.src.load_data_to_db import load_data_to_db
 from data_pipeline.src.fill_structured_table import fill_structured_table
 from data_pipeline.src.db import get_unstructured_data, get_structured_data
 
-def etl(count=20):
+def etl(count):
     print("starting etl...")
     records = get_dataset(n_rows=count, use_static_uuid=True)
     print(f"\n--- Сгенерированные записи ({len(records)}) ---")

@@ -5,4 +5,4 @@ if __name__ == "__main__":
     print("Initializing schema...")
     init_schema()
     print("Running ETL...")
-    etl()
+    etl(count=20)
