@@ -41,20 +41,14 @@ jobs:
         run: |
           pytest 
       - name: Build docker (optional)
-        run: docker build -t data-pipeline:ci .
+        run: docker compose build
 
-      - name: Run docker container (optional)
+      - name: Run docker compose (optional)
         env:
-          DB_HOST: host.docker.internal
+          DB_HOST: localhost
           DB_PORT: 5432
           DB_USER: postgres
           DB_PASS: postgres
           DB_NAME: etl_db
         run: |
-          docker run --rm \
-            -e DB_HOST=$DB_HOST \
-            -e DB_PORT=$DB_PORT \
-            -e DB_USER=$DB_USER \
-            -e DB_PASS=$DB_PASS \
-            -e DB_NAME=$DB_NAME \
-            data-pipeline:ci
+          docker compose up -d 
