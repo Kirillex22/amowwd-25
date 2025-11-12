@@ -3,8 +3,11 @@ from data_pipeline.src.load_data_to_db import load_data_to_db
 from data_pipeline.src.fill_structured_table import fill_structured_table
 from data_pipeline.src.db import get_unstructured_data, get_structured_data
 
-def etl(count):
-    print("starting etl...")
+def etl():
+    count=20
+    date_start, date_end = '1900-01-01', '2100-01-01'
+
+    print("ETL начат...")
     records = get_dataset(n_rows=count, use_static_uuid=True)
     print(f"\n--- Сгенерированные записи ({len(records)}) ---")
     for record in records:
@@ -17,8 +20,9 @@ def etl(count):
     print(df_raw.to_string())
     print(f"Всего сырых записей: {raw_count}")
     
-    fill_structured_table()
-    print("etl finished")
+    print(f"\nЩа заполним структурированную таблицу fill_structured_table({date_start}, {date_end})...")
+    fill_structured_table(date_start, date_end)
+    print("ETL закончен.")
     
     # выводим обработанные данные
     print("\n--- Обработанные данные из t_sql_source_structured ---")
