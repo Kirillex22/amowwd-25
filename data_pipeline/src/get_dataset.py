@@ -25,7 +25,7 @@ class RecordFactory(factory.Factory):
     class Meta:
         model = Record
 
-    id = factory.LazyFunction(lambda: str(uuid.uuid4()) if random.random() > PROBA else get_static_uuid())
+    id = factory.LazyFunction(lambda: str(uuid.uuid4()) if random.random() > ID_COLLISION_PROBA else get_static_uuid())
     name = factory.LazyFunction(lambda: fake.name() if random.random() > 0.2 else None)
     age = factory.LazyFunction(lambda: random.randint(1, 99) if random.random() > 0.5 else None)
     category = factory.LazyFunction(lambda: random.choice(["A", "B", "C", "D"]))
