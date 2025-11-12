@@ -5,15 +5,15 @@ from data_pipeline.src.db import get_unstructured_data, get_structured_data
 
 def etl():
     print("starting etl...")
-    records = get_dataset(use_static_uuid=True)
+    records = get_dataset(n_rows=20, use_static_uuid=True)
     print(f"\n--- Сгенерированные записи ({len(records)}) ---")
-    for record in records[:10]:
+    for record in records:
         print(record)
     load_data_to_db(records)
     
     # выводим сырые данные
     print("\n--- Сырые данные из t_sql_source_unstructured ---")
-    df_raw, raw_count = get_unstructured_data(limit=10)
+    df_raw, raw_count = get_unstructured_data()
     print(df_raw.to_string())
     print(f"Всего сырых записей: {raw_count}")
     
@@ -22,6 +22,6 @@ def etl():
     
     # выводим обработанные данные
     print("\n--- Обработанные данные из t_sql_source_structured ---")
-    df, total_count = get_structured_data(limit=10)
+    df, total_count = get_structured_data()
     print(df.to_string())
     print(f"\nВсего записей в таблице: {total_count}")

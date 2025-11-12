@@ -49,4 +49,4 @@ jobs:
           DB_PASS: postgres
           DB_NAME: etl_db
         run: |
-          docker compose up 
+           docker compose up --abort-on-container-exit --exit-code-from app
